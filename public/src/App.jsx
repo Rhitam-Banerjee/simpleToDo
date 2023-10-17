@@ -1,5 +1,12 @@
+import { Login, ToDo } from "./Components";
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <Login />
+      <ToDo />
+    </>
+  );
 };
 
 export default App;

@@ -1,4 +1,7 @@
-# Logs
+#discards
+node_modules
+server/.env
+#Logs
 logs
 *.log
 npm-debug.log*
