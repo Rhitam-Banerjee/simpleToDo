@@ -13,4 +13,4 @@ const userSchema = new mongoose.Schema({
     min: 8,
   },
 });
-module.exports = mongoose.model("Users", userSchema);
+module.exports = mongoose.model("User", userSchema);
