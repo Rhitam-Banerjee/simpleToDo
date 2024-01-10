@@ -23,8 +23,15 @@ const ToDoMenu = () => {
           <div className="relative after:absolute after:-bottom-3 after:left-1/2 after:-translate-x-1/2 after:h-[0.1px] after:w-[90%] after:bg-tertiary_transparent">
             <ul>
               {menuItems.map((list, index) => {
-                const { title, icon } = list;
-                return <MenuList key={index} title={title} icon={icon} />;
+                const { title, icon, notification } = list;
+                return (
+                  <MenuList
+                    key={index}
+                    title={title}
+                    icon={icon}
+                    notification={notification}
+                  />
+                );
               })}
             </ul>
           </div>
@@ -36,8 +43,15 @@ const ToDoMenu = () => {
           <div className="relative after:absolute after:-bottom-3 after:left-1/2 after:-translate-x-1/2 after:h-[0.1px] after:w-[90%] after:bg-tertiary_transparent">
             <ul>
               {listItems.map((list, index) => {
-                const { title, color } = list;
-                return <MenuList key={index} title={title} color={color} />;
+                const { title, color, notification } = list;
+                return (
+                  <MenuList
+                    key={index}
+                    title={title}
+                    color={color}
+                    notification={notification}
+                  />
+                );
               })}
             </ul>
             <div className="flex flex-row items-center justify-start cursor-pointer p-2 text-secondary">

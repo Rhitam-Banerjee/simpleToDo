@@ -3,7 +3,7 @@ import { tasks } from "../constants";
 import { Task } from "../Containers";
 const ToDoAll = () => {
   const handleClick = () => {
-    console.log("Clicked");
+    // console.log(e.target);
   };
   return (
     <div className="flex-1 flex flex-col justify-between h-full min-w-[200px] p-4 pt-0 rounded-md overflow-y-auto menuContainer">

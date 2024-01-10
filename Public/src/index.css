@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+* {
+  font-family: "Montserrat", sans-serif;
+}
 .menuContainer::-webkit-scrollbar {
   background: #e4e4e4;
   width: 5px;
