@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Login, Register, ToDo } from "./Pages";
+import { Login, Register, Settings, ToDo } from "./Pages";
 const App = () => {
   return (
     <BrowserRouter>
@@ -7,6 +7,7 @@ const App = () => {
         <Route path="/" element={<ToDo />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
   );

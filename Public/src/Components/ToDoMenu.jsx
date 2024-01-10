@@ -1,24 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PiHamburger } from "react-icons/pi";
-import { CiCirclePlus } from "react-icons/ci";
+import { TiPlus } from "react-icons/ti";
 import { TbLogout2 } from "react-icons/tb";
+import { LuSettings2 } from "react-icons/lu";
 import { listItems, menuItems, tagItems } from "../constants";
-import MenuList from "../Containers/MenuList";
-import { useEffect } from "react";
+import { MenuList } from "../Containers";
 const ToDoMenu = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
   };
-  useEffect(() => {
-    if (!localStorage.getItem("ToDo-user")) navigate("/login");
-  }, []);
   return (
     <div className="flex-1 flex flex-col justify-between bg-base h-full max-w-[250px] p-4 rounded-md overflow-y-auto menuContainer">
       <div>
         <div className="flex flex-row items-center justify-between relative after:absolute after:-bottom-4 after:left-1/2 after:-translate-x-1/2 after:h-[0.1px] after:w-[90%] after:bg-tertiary_transparent">
-          <h1 className="font-black text-primary">Menu</h1>
+          <h1 className="font-black text-[1.1rem] text-primary">Menu</h1>
           <PiHamburger />
         </div>
         <div className="mt-8">
@@ -43,11 +40,9 @@ const ToDoMenu = () => {
                 return <MenuList key={index} title={title} color={color} />;
               })}
             </ul>
-            <div className="flex flex-row items-center justify-start cursor-pointer p-2">
-              <CiCirclePlus className="mr-3 w-[15px]" />
-              <span className="font-bold text-secondary text-[0.8rem]">
-                Add New List
-              </span>
+            <div className="flex flex-row items-center justify-start cursor-pointer p-2 text-secondary">
+              <TiPlus className="mr-3 w-[15px] " />
+              <span className="font-bold text-[0.8rem]">Add New List</span>
             </div>
           </div>
         </div>
@@ -70,12 +65,25 @@ const ToDoMenu = () => {
           </div>
         </div>
       </div>
-      <div
-        className="mt-10 flex flex-row items-center justify-start cursor-pointer max-w-max"
-        onClick={() => handleLogout()}
-      >
-        <TbLogout2 className="mr-2" />
-        <span className="font-bold text-secondary text-[0.8rem]">Sign-Out</span>
+      <div>
+        <div className="mt-10 flex flex-row items-center justify-start cursor-pointer max-w-max">
+          <LuSettings2 className="mr-2" />
+          <Link
+            to="/settings"
+            className="font-bold text-secondary text-[0.8rem]"
+          >
+            Settings
+          </Link>
+        </div>
+        <div
+          className=" mt-4 flex flex-row items-center justify-start cursor-pointer max-w-max"
+          onClick={() => handleLogout()}
+        >
+          <TbLogout2 className="mr-2" />
+          <span className="font-bold text-secondary text-[0.8rem]">
+            Sign-Out
+          </span>
+        </div>
       </div>
     </div>
   );
