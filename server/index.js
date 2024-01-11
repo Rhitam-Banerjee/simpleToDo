@@ -6,7 +6,12 @@ const socketio = require("socket.io");
 const cors = require("cors");
 const app = express();
 dotenv.config();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://simpleto-do.vercel.app",
+    methods: ["POST", "GET"],
+  })
+);
 app.use(express.json());
 app.use("/api", userRoutes);
 mongoose
