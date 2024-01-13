@@ -18,7 +18,6 @@ const Login = () => {
     theme: "dark",
   };
   const handleChange = (e) => {
-    // console.log(`${[e.target.name]}: ${e.target.value}`);
     setValues({ ...values, [e.target.name]: e.target.value });
   };
   const handleValidation = () => {
@@ -30,6 +29,7 @@ const Login = () => {
       toast.error("Password should not be empty", toastPreference);
       return false;
     }
+    // dispatch(login(username));
     return true;
   };
 
@@ -41,7 +41,6 @@ const Login = () => {
         username,
         password,
       });
-      console.log(data);
       if (data.status === false) {
         toast.error(data.msg, toastPreference);
       }

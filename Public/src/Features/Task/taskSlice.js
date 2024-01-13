@@ -1,40 +1,12 @@
-import { menuList, allTasks } from "../assets";
-export const menuItems = [
-  {
-    title: "All",
-    icon: allTasks,
-    notification: 10,
-  },
-  {
-    title: "Today",
-    icon: menuList,
-    notification: 5,
-  },
-];
-export const listItems = [
-  {
-    title: "Important",
-    color: "yellow-300",
-    notification: 1,
-  },
-  {
-    title: "Personal",
-    color: "red-300",
-    notification: 4,
-  },
-  {
-    title: "Work",
-    color: "blue-300",
-    notification: 5,
-  },
-];
-export const tasks = [
+import { createSlice } from "@reduxjs/toolkit";
+const initialState = [
   {
     title: "Research Content Idea",
     description:
       "Talk to the barber and get how to contribute to his internet presence",
     date: "2017-06-01",
     list: "Important",
+    tags: ["Tag 1", "Tag 2"],
     subTasks: ["Cut hair", "Submit the research docs. to him"],
     isComplete: false,
   },
@@ -44,6 +16,7 @@ export const tasks = [
       "Help client customize his own database and demonstrate the use",
     date: "2019-05-21",
     list: "Work",
+    tags: ["Tag 1"],
     subTasks: ["Deploy Application on Supabase"],
     isComplete: false,
   },
@@ -52,6 +25,7 @@ export const tasks = [
     description: "Talk to the accountant and get how to renew liscence",
     date: "2019-05-11",
     list: "Work",
+    tags: ["Tag 2"],
     subTasks: [],
     isComplete: true,
   },
@@ -60,7 +34,13 @@ export const tasks = [
     description: "Design and Print Business Cards",
     date: "2020-09-25",
     list: "Personal",
+    tags: ["Tag 1", "Tag 2"],
     subTasks: [],
     isComplete: false,
   },
 ];
+const taskSlice = createSlice({
+  name: "tasks",
+  initialState: initialState,
+});
+export default taskSlice.reducer;
