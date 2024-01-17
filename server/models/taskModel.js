@@ -1,35 +1,37 @@
 const mongoose = require("mongoose");
 const taskSchema = new mongoose.Schema(
   {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: false,
-    },
-    date: {
-      type: Date,
-      required: true,
-    },
-    list: {
-      type: String,
-      required: true,
-    },
-    subTask: [
-      {
+    task: {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
         type: String,
         required: false,
       },
-    ],
-    isComplete: {
-      tyoe: Boolean,
+      date: {
+        type: Date,
+        required: true,
+      },
+      list: {
+        type: String,
+        required: true,
+      },
+      subTask: [
+        {
+          type: String,
+          required: false,
+        },
+      ],
+      isComplete: {
+        tyoe: Boolean,
+        required: true,
+      },
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
   },

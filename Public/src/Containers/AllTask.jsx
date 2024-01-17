@@ -2,13 +2,13 @@ import { TiPlus } from "react-icons/ti";
 import { Task } from ".";
 import { useSelector } from "react-redux";
 const AllTask = () => {
-  const tasks = useSelector((store) => store.task);
+  const { tasks } = useSelector((store) => store.task);
   return (
     <div className="flex-1 flex flex-col justify-between h-full min-w-[200px] max-w-[750px] mr-auto p-4 pt-0 rounded-md overflow-y-auto menuContainer">
       <div className="pb-8">
         <div className="flex flex-row items-center justify-between w-max">
           <h1 className="font-bold text-[2.5rem] text-primary">All</h1>
-          <div className="mt-[8px] ml-3 w-[30px] h-[30px] border-tertiary_transparent_max border-2 grid place-items-center rounded-md">
+          <div className="ml-3 w-[30px] h-[30px] border-tertiary_transparent_max border-2 grid place-items-center rounded-md">
             <span className="text-secondary font-bold">10</span>
           </div>
         </div>

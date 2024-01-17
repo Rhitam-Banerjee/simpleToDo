@@ -14,7 +14,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, actions) => {
-      state.username = actions.payload;
+      state.userId = actions.payload._id;
+      state.username = actions.payload.username;
     },
     logOut: (state) => {
       state.username = "";
@@ -27,6 +28,7 @@ const userSlice = createSlice({
     },
     closeTaskEdit: (state) => {
       state.taskEditShow = false;
+      state.tasktoShow = {};
     },
     showTask: (state, { payload }) => {
       state.tasktoShow = payload;

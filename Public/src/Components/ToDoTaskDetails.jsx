@@ -2,12 +2,25 @@ import { MdAddTask } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { closeTaskEdit } from "../Features/Users/userSlice";
 import { useState } from "react";
+import { editTask } from "../Features/Task/taskSlice";
 const ToDoTaskDetails = () => {
   const { tasktoShow } = useSelector((store) => store.user);
   const { Items } = useSelector((store) => store.listItems);
-  const { title, description, date, list } = tasktoShow;
-  const [editedTask, setEditedTask] = useState({});
+  const { id, title, description, date, list } = tasktoShow;
+  const [editedTask, setEditedTask] = useState({
+    title: title,
+    description: description,
+    date: date,
+    list: list,
+  });
   const dispatch = useDispatch();
+  const handleChandeTaskDetails = (e) => {
+    setEditedTask({ ...editedTask, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(editTask({ ...editedTask, id: id }));
+  };
   return (
     <div className="flex-1 flex flex-col justify-start bg-base h-full max-w-[500px] p-4 rounded-md overflow-y-auto menuContainer">
       <div className="pb-8">
@@ -16,7 +29,7 @@ const ToDoTaskDetails = () => {
           <MdAddTask />
         </div>
       </div>
-      <form className="flex flex-col">
+      <form className="flex flex-col" onSubmit={(e) => handleSubmit(e)}>
         <div className="flex flex-col items-start justify-start">
           <label
             className="font-black text-[0.8rem] text-secondary"
@@ -28,7 +41,8 @@ const ToDoTaskDetails = () => {
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             type="text"
             name="title"
-            value={title}
+            value={editedTask.title}
+            onChange={(e) => handleChandeTaskDetails(e)}
           />
         </div>
         <div className="flex flex-col items-start justify-start">
@@ -39,9 +53,10 @@ const ToDoTaskDetails = () => {
             Description
           </label>
           <textarea
-            className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary max-h-[100px] outline-none"
+            className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             name="description"
-            value={description}
+            value={editedTask.description}
+            onChange={(e) => handleChandeTaskDetails(e)}
             rows="10"
           ></textarea>
         </div>
@@ -56,7 +71,8 @@ const ToDoTaskDetails = () => {
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             type="date"
             name="date"
-            value={date}
+            value={editedTask.date}
+            onChange={(e) => handleChandeTaskDetails(e)}
           />
         </div>
         <div className="flex flex-col items-start justify-start">
@@ -69,7 +85,8 @@ const ToDoTaskDetails = () => {
           <select
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             name="list"
-            value={list}
+            value={editedTask.list}
+            onChange={(e) => handleChandeTaskDetails(e)}
           >
             {Items.map((item, index) => {
               const { listName } = item;

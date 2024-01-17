@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { IoIosArrowForward } from "react-icons/io";
+import { TiTick } from "react-icons/ti";
 import { MdOutlineDateRange } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { showTask, showTaskEdit } from "../Features/Users/userSlice";
@@ -17,12 +18,15 @@ const Task = ({ task }) => {
     >
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row justify-start items-center text-[0.8rem]">
-          <input
-            type="checkbox"
-            name="Complete"
-            value={isComplete}
-            className="mr-3 accent-green-500"
-          />
+          <div
+            className={`w-[20px] h-[20px] grid place-items-center rounded-sm mr-2 ${
+              isComplete
+                ? "bg-green-300"
+                : "border-secondary_transparent border-[1px]"
+            }`}
+          >
+            {isComplete && <TiTick className="text-white text-[1.1rem]" />}
+          </div>
           <div>
             <span>{title}</span>
           </div>
