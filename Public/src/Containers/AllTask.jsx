@@ -1,7 +1,8 @@
 import { TiPlus } from "react-icons/ti";
-import { tasks } from "../constants";
 import { Task } from ".";
+import { useSelector } from "react-redux";
 const AllTask = () => {
+  const tasks = useSelector((store) => store.task);
   const handleClick = () => {
     // console.log(e.target);
   };
@@ -18,7 +19,7 @@ const AllTask = () => {
       <div className="flex-1">
         <div className="flex flex-row items-center justify-start cursor-pointer p-2 text-secondary border-tertiary_transparent_max border-2 rounded-md">
           <TiPlus className="mr-3 w-[15px] " />
-          <span className="font-bold text-[0.8rem]">Add New List</span>
+          <span className="font-bold text-[0.8rem]">Add New Task</span>
         </div>
         <div>
           {tasks.map((task, index) => {

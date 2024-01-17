@@ -4,19 +4,41 @@ import { PiHamburger } from "react-icons/pi";
 import { TiPlus } from "react-icons/ti";
 import { TbLogout2 } from "react-icons/tb";
 import { LuSettings2 } from "react-icons/lu";
-import { listItems, menuItems } from "../constants";
+import { menuItems } from "../constants";
 import { MenuList } from "../Containers";
 import { useDispatch, useSelector } from "react-redux";
+import { ColorPicker, useColor } from "react-color-palette";
+import "react-color-palette/css";
 import { logOut } from "../Features/Users/userSlice";
+import { useEffect, useState } from "react";
+import { addListItems } from "../Features/ListItems/listItemsSlice";
 const ToDoMenu = () => {
   const { username } = useSelector((store) => store.user);
+  const { Items } = useSelector((store) => store.listItems);
+  const [color, setColor] = useColor("cyan");
+  const [isAddListFormVisible, setIsAddListFormVisible] = useState(false);
+  const [newList, setNewList] = useState({
+    listName: "",
+    color: "",
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const formSubmit = (e) => {
+    e.preventDefault();
+    setNewList({
+      listName: e.target[0].value,
+      color: e.target[1].value,
+    });
+    setIsAddListFormVisible(false);
+  };
   const handleLogout = () => {
     dispatch(logOut());
     localStorage.clear();
     navigate("/login");
   };
+  useEffect(() => {
+    dispatch(addListItems(newList));
+  }, [newList]);
   return (
     <div className="flex-1 flex flex-col justify-between bg-base h-full max-w-[250px] p-4 rounded-md overflow-y-auto menuContainer">
       <div>
@@ -46,24 +68,45 @@ const ToDoMenu = () => {
           <h3 className="font-black text-[0.6rem] text-secondary mb-4">
             LISTS
           </h3>
-          <div className="">
+          <div>
             <ul>
-              {listItems.map((list, index) => {
-                const { title, color, notification } = list;
-                return (
-                  <MenuList
-                    key={index}
-                    title={title}
-                    color={color}
-                    notification={notification}
-                  />
-                );
+              {Items.map((list, index) => {
+                const { listName, color } = list;
+                return <MenuList key={index} title={listName} color={color} />;
               })}
             </ul>
-            <div className="flex flex-row items-center justify-start cursor-pointer p-2 text-secondary">
-              <TiPlus className="mr-3 w-[15px] " />
-              <span className="font-bold text-[0.8rem]">Add New List</span>
-            </div>
+            {isAddListFormVisible && (
+              <form className="w-full" onSubmit={(e) => formSubmit(e)}>
+                <input
+                  className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
+                  type="text"
+                  placeholder="Enter List name"
+                />
+                <label className="font-black text-[0.8rem] text-secondary">
+                  Choose Color
+                </label>
+                <ColorPicker
+                  color={color}
+                  hideInput={["rgb", "hsv"]}
+                  onChange={setColor}
+                />
+                <button
+                  type="submit"
+                  className="bg-secondary_transparent text-base font-bold !text-[0.8rem] mt-4 rounded-md px-2 py-1"
+                >
+                  Add New
+                </button>
+              </form>
+            )}
+            {!isAddListFormVisible && (
+              <div
+                className="flex flex-row items-center justify-start cursor-pointer p-2 text-secondary"
+                onClick={() => setIsAddListFormVisible(true)}
+              >
+                <TiPlus className="mr-3 w-[15px] " />
+                <span className="font-bold text-[0.8rem]">Add New List</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

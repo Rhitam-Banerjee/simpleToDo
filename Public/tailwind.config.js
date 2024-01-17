@@ -24,5 +24,5 @@ export default {
     },
   },
   plugins: [],
-  safelist: [{ pattern: /bg-./ }],
+  safelist: [{ pattern: /bg-*/ }],
 };

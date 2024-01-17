@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 // import { host } from "../../utils/APIroutes";
 
 const initialState = {
-  username: "Rhitam",
+  userId: "",
+  username: "",
   tabToShow: "All",
 };
 

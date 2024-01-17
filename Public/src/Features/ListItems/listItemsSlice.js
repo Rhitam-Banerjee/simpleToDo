@@ -1,23 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = [
-  {
-    title: "Personal",
-    color: "red-300",
-    notification: 4,
-  },
-  {
-    title: "Work",
-    color: "blue-300",
-    notification: 5,
-  },
-  {
-    title: "Important",
-    color: "yellow-300",
-    notification: 1,
-  },
-];
+const initialState = {
+  Items: [],
+};
 const listItemsSlice = createSlice({
   name: "listItems",
-  initialState: initialState,
+  initialState,
+  reducers: {
+    addListItems: (state, { payload }) => {
+      if (payload.listName !== "") {
+        state.Items = [...state.Items, payload];
+        console.log(state.Items);
+      }
+    },
+  },
 });
+export const { addListItems } = listItemsSlice.actions;
 export default listItemsSlice.reducer;

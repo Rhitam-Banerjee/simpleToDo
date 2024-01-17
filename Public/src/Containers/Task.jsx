@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { IoIosArrowForward } from "react-icons/io";
 import { MdOutlineDateRange } from "react-icons/md";
-import { listItems } from "../constants";
+import { useSelector } from "react-redux";
 const Task = ({ task, handleClick }) => {
   const { title, date, list, isComplete } = task;
+  const listItems = useSelector((store) => store.listItems);
   return (
     <div
       onClick={handleClick}

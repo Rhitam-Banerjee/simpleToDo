@@ -24,7 +24,8 @@ const MenuList = ({
         {icon && <img className="w-[15px] mr-3" src={icon} alt={title} />}
         {color && (
           <div
-            className={`h-[15px] w-[15px] bg-${color} mr-3 rounded-sm`}
+            className={`h-[15px] w-[15px] mr-3 rounded-sm`}
+            style={{ background: color }}
           ></div>
         )}
         <span className="font-semibold text-[0.8rem] text-secondary">
