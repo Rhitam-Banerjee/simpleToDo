@@ -1,21 +1,26 @@
 /* eslint-disable react/prop-types */
 import { IoIosArrowForward } from "react-icons/io";
 import { MdOutlineDateRange } from "react-icons/md";
-import { useSelector } from "react-redux";
-const Task = ({ task, handleClick }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { showTask, showTaskEdit } from "../Features/Users/userSlice";
+const Task = ({ task }) => {
   const { title, date, list, isComplete } = task;
-  const listItems = useSelector((store) => store.listItems);
+  const { Items } = useSelector((store) => store.listItems);
+  const dispatch = useDispatch();
   return (
     <div
-      onClick={handleClick}
       className="flex flex-col justify-between py-4 px-2 text-primary_transparent font-bold cursor-pointer relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[0.1px] after:w-[90%] after:bg-base_transparent"
+      onClick={() => {
+        dispatch(showTaskEdit());
+        dispatch(showTask(task));
+      }}
     >
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row justify-start items-center text-[0.8rem]">
           <input
             type="checkbox"
-            checked={isComplete}
-            readOnly={true}
+            name="Complete"
+            value={isComplete}
             className="mr-3 accent-green-500"
           />
           <div>
@@ -33,9 +38,12 @@ const Task = ({ task, handleClick }) => {
         </div>
         <div className="flex flex-row justify-start items-center w-[100px] ml-4">
           <div
-            className={`w-[13px] h-[13px] bg-${listItems
-              .filter((listCol) => listCol.title === list)
-              .map((listCol) => listCol.color)} mr-2 rounded-sm`}
+            className={`w-[13px] h-[13px] mr-2 rounded-sm`}
+            style={{
+              background: `${Items.filter(
+                (listItems) => listItems.listName === list
+              ).map((item) => item.color)}`,
+            }}
           ></div>
           <span>{list}</span>
         </div>

@@ -5,6 +5,8 @@ const initialState = {
   userId: "",
   username: "",
   tabToShow: "All",
+  taskEditShow: false,
+  tasktoShow: {},
 };
 
 const userSlice = createSlice({
@@ -20,7 +22,23 @@ const userSlice = createSlice({
     switchTask: (state, actions) => {
       state.tabToShow = actions.payload;
     },
+    showTaskEdit: (state) => {
+      state.taskEditShow = true;
+    },
+    closeTaskEdit: (state) => {
+      state.taskEditShow = false;
+    },
+    showTask: (state, { payload }) => {
+      state.tasktoShow = payload;
+    },
   },
 });
-export const { login, logOut, switchTask } = userSlice.actions;
+export const {
+  login,
+  logOut,
+  switchTask,
+  showTaskEdit,
+  closeTaskEdit,
+  showTask,
+} = userSlice.actions;
 export default userSlice.reducer;

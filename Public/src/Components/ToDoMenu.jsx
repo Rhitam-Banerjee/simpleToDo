@@ -76,27 +76,35 @@ const ToDoMenu = () => {
               })}
             </ul>
             {isAddListFormVisible && (
-              <form className="w-full" onSubmit={(e) => formSubmit(e)}>
-                <input
-                  className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
-                  type="text"
-                  placeholder="Enter List name"
-                />
-                <label className="font-black text-[0.8rem] text-secondary">
-                  Choose Color
-                </label>
-                <ColorPicker
-                  color={color}
-                  hideInput={["rgb", "hsv"]}
-                  onChange={setColor}
-                />
+              <>
+                <form className="w-full" onSubmit={(e) => formSubmit(e)}>
+                  <input
+                    className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
+                    type="text"
+                    placeholder="Enter List name"
+                  />
+                  <label className="font-black text-[0.8rem] text-secondary">
+                    Choose Color
+                  </label>
+                  <ColorPicker
+                    color={color}
+                    hideInput={["rgb", "hsv"]}
+                    onChange={setColor}
+                  />
+                  <button
+                    type="submit"
+                    className="bg-secondary_transparent text-base font-bold !text-[0.8rem] mt-4 rounded-md px-2 py-1"
+                  >
+                    Add New
+                  </button>
+                </form>
                 <button
-                  type="submit"
                   className="bg-secondary_transparent text-base font-bold !text-[0.8rem] mt-4 rounded-md px-2 py-1"
+                  onClick={() => setIsAddListFormVisible(false)}
                 >
-                  Add New
+                  Cancel
                 </button>
-              </form>
+              </>
             )}
             {!isAddListFormVisible && (
               <div

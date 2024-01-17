@@ -3,11 +3,8 @@ import { Task } from ".";
 import { useSelector } from "react-redux";
 const AllTask = () => {
   const tasks = useSelector((store) => store.task);
-  const handleClick = () => {
-    // console.log(e.target);
-  };
   return (
-    <div className="flex-1 flex flex-col justify-between h-full min-w-[200px] p-4 pt-0 rounded-md overflow-y-auto menuContainer">
+    <div className="flex-1 flex flex-col justify-between h-full min-w-[200px] max-w-[750px] mr-auto p-4 pt-0 rounded-md overflow-y-auto menuContainer">
       <div className="pb-8">
         <div className="flex flex-row items-center justify-between w-max">
           <h1 className="font-bold text-[2.5rem] text-primary">All</h1>
@@ -23,7 +20,7 @@ const AllTask = () => {
         </div>
         <div>
           {tasks.map((task, index) => {
-            return <Task key={index} task={task} handleClick={handleClick} />;
+            return <Task key={index} task={task} />;
           })}
         </div>
       </div>
