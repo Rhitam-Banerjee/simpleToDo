@@ -21,6 +21,7 @@ const TaskEdit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(editTask({ ...editedTask, id: id }));
+    dispatch(closeTaskEdit());
   };
   return (
     <>
@@ -39,6 +40,7 @@ const TaskEdit = () => {
             Title
           </label>
           <input
+            id="title"
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             type="text"
             name="title"
@@ -54,6 +56,7 @@ const TaskEdit = () => {
             Description
           </label>
           <textarea
+            id="description"
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             name="description"
             value={editedTask.description}
@@ -71,6 +74,7 @@ const TaskEdit = () => {
           <input
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             type="date"
+            id="date"
             name="date"
             value={editedTask.date}
             onChange={(e) => handleChandeTaskDetails(e)}
@@ -86,6 +90,7 @@ const TaskEdit = () => {
           <select
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             name="list"
+            id="list"
             value={editedTask.list}
             onChange={(e) => handleChandeTaskDetails(e)}
           >
@@ -98,6 +103,29 @@ const TaskEdit = () => {
               );
             })}
           </select>
+        </div>
+        <div className="flex flex-col items-start justify-start">
+          <label
+            htmlFor="isComplete"
+            className="font-black text-[0.8rem] text-secondary"
+          >
+            Task
+          </label>
+          <div>
+            <input
+              id="isComplete"
+              type="checkbox"
+              name="isComplete"
+              value={editedTask.isComplete}
+              checked={editedTask.isComplete}
+              onChange={(e) => handleChandeTaskDetails(e)}
+            />
+            {editedTask.isComplete ? (
+              <h3>Task Completed</h3>
+            ) : (
+              <h3>Task Pending</h3>
+            )}
+          </div>
         </div>
         <button
           className="ml-auto w-max bg-secondary_transparent text-base font-bold !text-[0.8rem] mt-4 rounded-md px-2 py-1"

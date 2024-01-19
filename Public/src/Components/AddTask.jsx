@@ -21,6 +21,8 @@ const AddTask = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addTask({ ...addTaskDetails }));
+    dispatch(closeTaskEdit());
+    setAddTaskDetails({});
   };
   return (
     <>
@@ -41,7 +43,9 @@ const AddTask = () => {
           <input
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             type="text"
+            id="title"
             name="title"
+            required={true}
             value={addTaskDetails.title}
             onChange={(e) => handleChandeTaskDetails(e)}
           />
@@ -56,6 +60,7 @@ const AddTask = () => {
           <textarea
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             name="description"
+            id="description"
             value={addTaskDetails.description}
             onChange={(e) => handleChandeTaskDetails(e)}
             rows="10"
@@ -72,6 +77,8 @@ const AddTask = () => {
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             type="date"
             name="date"
+            id="date"
+            required={true}
             value={addTaskDetails.date}
             onChange={(e) => handleChandeTaskDetails(e)}
           />
@@ -86,6 +93,7 @@ const AddTask = () => {
           <select
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             name="list"
+            id="list"
             value={addTaskDetails.list}
             onChange={(e) => handleChandeTaskDetails(e)}
           >

@@ -28,7 +28,6 @@ const userSlice = createSlice({
       state.taskEditShow = true;
       if (payload === "Add") state.taskDetail = "Add";
       else state.taskDetail = "Edit";
-      console.log(payload);
     },
     closeTaskEdit: (state) => {
       state.taskEditShow = false;

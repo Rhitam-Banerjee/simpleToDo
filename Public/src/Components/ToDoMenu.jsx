@@ -119,13 +119,15 @@ const ToDoMenu = () => {
         </div>
       </div>
       <div>
-        <div className="mt-10 flex flex-row items-center justify-start cursor-pointer max-w-max">
-          <LuSettings2 className="mr-2" />
+        <div className="mt-10 cursor-pointer max-w-max">
           <Link
             to="/settings"
-            className="font-bold text-secondary text-[0.8rem]"
+            className="flex flex-row items-center justify-start"
           >
-            Settings
+            <LuSettings2 className="mr-2" />
+            <span className="font-bold text-secondary text-[0.8rem]">
+              Settings
+            </span>
           </Link>
         </div>
         <div
