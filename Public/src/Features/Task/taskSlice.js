@@ -6,9 +6,8 @@ const initialState = {
       title: "Research Content Idea",
       description:
         "Talk to the barber and get how to contribute to his internet presence",
-      date: "2017-06-01",
+      date: "2024-01-31",
       list: "Important",
-      subTasks: ["Cut hair", "Submit the research docs. to him"],
       isComplete: false,
     },
     {
@@ -16,27 +15,24 @@ const initialState = {
       title: "Create a database for project",
       description:
         "Help client customize his own database and demonstrate the use",
-      date: "2019-05-21",
+      date: "12-18-2023",
       list: "Work",
-      subTasks: ["Deploy Application on Supabase"],
       isComplete: false,
     },
     {
       id: 3,
       title: "Consult Accountat",
       description: "Talk to the accountant and get how to renew liscence",
-      date: "2019-05-11",
+      date: "12-18-2024",
       list: "Work",
-      subTasks: [],
       isComplete: true,
     },
     {
       id: 4,
       title: "Print Business Card",
       description: "Design and Print Business Cards",
-      date: "2020-09-25",
+      date: "1-18-2024",
       list: "Personal",
-      subTasks: [],
       isComplete: false,
     },
   ],
@@ -46,10 +42,29 @@ const taskSlice = createSlice({
   initialState: initialState,
   reducers: {
     editTask: (state, { payload }) => {
-      // console.log(state.tasks.filter((task) => task.id === payload.id));
-      console.log(payload.id);
+      const { tasks } = state;
+      const newTask = tasks
+        .filter((task) => task.id === payload.id)
+        .map((task) => {
+          return JSON.parse(JSON.stringify(task));
+        });
+      const keysArrPayload = Object.keys(payload);
+      keysArrPayload.map((key) => {
+        newTask[0][`${key}`] = payload[`${key}`];
+      });
+      state.tasks.map((task) => {
+        if (task.id === payload.id) {
+          keysArrPayload.forEach((key) => {
+            task[`${key}`] = newTask[0][`${key}`];
+          });
+        }
+      });
+    },
+    addTask: (state, { payload }) => {
+      state.tasks.push(payload);
+      console.log(payload);
     },
   },
 });
-export const { editTask } = taskSlice.actions;
+export const { addTask, editTask } = taskSlice.actions;
 export default taskSlice.reducer;

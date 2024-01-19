@@ -18,12 +18,6 @@ const taskSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
-      subTask: [
-        {
-          type: String,
-          required: false,
-        },
-      ],
       isComplete: {
         tyoe: Boolean,
         required: true,

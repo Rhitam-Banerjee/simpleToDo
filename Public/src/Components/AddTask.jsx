@@ -1,26 +1,26 @@
-import { MdAddTask } from "react-icons/md";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeTaskEdit } from "../Features/Users/userSlice";
-import { useState } from "react";
-import { editTask } from "../Features/Task/taskSlice";
-const TaskEdit = () => {
-  const { tasktoShow } = useSelector((store) => store.user);
-  const { Items } = useSelector((store) => store.listItems);
-  const { id, title, description, date, list, isComplete } = tasktoShow;
-  const [editedTask, setEditedTask] = useState({
-    title: title,
-    description: description,
-    date: date,
-    list: list,
-    isComplete: isComplete,
-  });
+import { MdAddTask } from "react-icons/md";
+import { v4 as uuidv4 } from "uuid";
+import { addTask } from "../Features/Task/taskSlice";
+const AddTask = () => {
   const dispatch = useDispatch();
+  const { Items } = useSelector((store) => store.listItems);
+  const [addTaskDetails, setAddTaskDetails] = useState({
+    id: uuidv4(),
+    title: "",
+    description: "",
+    date: "",
+    list: Items[0].listName,
+    isComplete: false,
+  });
   const handleChandeTaskDetails = (e) => {
-    setEditedTask({ ...editedTask, [e.target.name]: e.target.value });
+    setAddTaskDetails({ ...addTaskDetails, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editTask({ ...editedTask, id: id }));
+    dispatch(addTask({ ...addTaskDetails }));
   };
   return (
     <>
@@ -42,7 +42,7 @@ const TaskEdit = () => {
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             type="text"
             name="title"
-            value={editedTask.title}
+            value={addTaskDetails.title}
             onChange={(e) => handleChandeTaskDetails(e)}
           />
         </div>
@@ -56,7 +56,7 @@ const TaskEdit = () => {
           <textarea
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             name="description"
-            value={editedTask.description}
+            value={addTaskDetails.description}
             onChange={(e) => handleChandeTaskDetails(e)}
             rows="10"
           ></textarea>
@@ -72,7 +72,7 @@ const TaskEdit = () => {
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             type="date"
             name="date"
-            value={editedTask.date}
+            value={addTaskDetails.date}
             onChange={(e) => handleChandeTaskDetails(e)}
           />
         </div>
@@ -86,7 +86,7 @@ const TaskEdit = () => {
           <select
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             name="list"
-            value={editedTask.list}
+            value={addTaskDetails.list}
             onChange={(e) => handleChandeTaskDetails(e)}
           >
             {Items.map((item, index) => {
@@ -103,7 +103,7 @@ const TaskEdit = () => {
           className="ml-auto w-max bg-secondary_transparent text-base font-bold !text-[0.8rem] mt-4 rounded-md px-2 py-1"
           type="submit"
         >
-          Edit
+          Add Task
         </button>
       </form>
       <button
@@ -116,4 +116,4 @@ const TaskEdit = () => {
   );
 };
 
-export default TaskEdit;
+export default AddTask;

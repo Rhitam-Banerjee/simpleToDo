@@ -12,8 +12,8 @@ const Task = ({ task }) => {
     <div
       className="flex flex-col justify-between py-4 px-2 text-primary_transparent font-bold cursor-pointer relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[0.1px] after:w-[90%] after:bg-base_transparent"
       onClick={() => {
-        dispatch(showTaskEdit());
         dispatch(showTask(task));
+        dispatch(showTaskEdit("Edit"));
       }}
     >
       <div className="flex flex-row justify-between items-center">

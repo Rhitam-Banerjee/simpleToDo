@@ -1,5 +1,9 @@
 import { TiPlus } from "react-icons/ti";
+import { useDispatch } from "react-redux";
+import { showTaskEdit } from "../Features/Users/userSlice";
+
 const TodayTask = () => {
+  const dispatch = useDispatch();
   return (
     <div className="flex-1 flex flex-col justify-between h-full min-w-[200px] p-4 pt-0 rounded-md overflow-y-auto menuContainer">
       <div className="pb-8">
@@ -10,10 +14,10 @@ const TodayTask = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1">
+      <div className="flex-1" onClick={() => dispatch(showTaskEdit("Add"))}>
         <div className="flex flex-row items-center justify-start cursor-pointer p-2 text-secondary border-tertiary_transparent_max border-2 rounded-md">
           <TiPlus className="mr-3 w-[15px] " />
-          <span className="font-bold text-[0.8rem]">Add New List</span>
+          <span className="font-bold text-[0.8rem]">Add New Task</span>
         </div>
       </div>
     </div>
