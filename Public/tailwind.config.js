@@ -8,6 +8,8 @@ export default {
         secondary: "#7F7F7F",
         tertiary: "#CCCCCC",
         base: "#F2F2F2",
+        highlight: "#282634",
+        logoColor: "#fffb40",
         primary_transparent: "rgba(89, 89, 89, 0.5)",
         primary_transparent_max: "rgba(89, 89, 89, 0.2)",
         secondary_transparent: "rgba(127, 127, 127, 0.5)",
