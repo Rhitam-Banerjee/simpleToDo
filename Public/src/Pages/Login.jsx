@@ -15,7 +15,6 @@ const Login = () => {
     autoClose: 6000,
     pauseOnHover: true,
     draggable: true,
-    theme: "dark",
   };
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });

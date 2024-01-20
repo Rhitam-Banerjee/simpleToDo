@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeTaskEdit } from "../Features/Users/userSlice";
 import { useState } from "react";
 import { editTask } from "../Features/Task/taskSlice";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const TaskEdit = () => {
   const { tasktoShow } = useSelector((store) => store.user);
   const { Items } = useSelector((store) => store.listItems);
@@ -14,14 +16,25 @@ const TaskEdit = () => {
     list: list,
     isComplete: isComplete,
   });
+  const toastPreference = {
+    position: "bottom-right",
+    autoClose: 6000,
+    pauseOnHover: true,
+    draggable: true,
+  };
   const dispatch = useDispatch();
   const handleChandeTaskDetails = (e) => {
     setEditedTask({ ...editedTask, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editTask({ ...editedTask, id: id }));
-    dispatch(closeTaskEdit());
+    const { title, description } = editedTask;
+    if (title.trim().length === 0 || description.trim().length === 0) {
+      toast.error("Field cannot be empty", toastPreference);
+    } else {
+      dispatch(editTask({ ...editedTask, id: id }));
+      dispatch(closeTaskEdit());
+    }
   };
   return (
     <>
@@ -140,6 +153,7 @@ const TaskEdit = () => {
       >
         Cancle
       </button>
+      <ToastContainer />
     </>
   );
 };

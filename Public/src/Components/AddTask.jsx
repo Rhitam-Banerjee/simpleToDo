@@ -4,6 +4,9 @@ import { closeTaskEdit } from "../Features/Users/userSlice";
 import { MdAddTask } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
 import { addTask } from "../Features/Task/taskSlice";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const AddTask = () => {
   const dispatch = useDispatch();
   const { Items } = useSelector((store) => store.listItems);
@@ -15,14 +18,25 @@ const AddTask = () => {
     list: Items[0].listName,
     isComplete: false,
   });
+  const toastPreference = {
+    position: "bottom-right",
+    autoClose: 6000,
+    pauseOnHover: true,
+    draggable: true,
+  };
   const handleChandeTaskDetails = (e) => {
     setAddTaskDetails({ ...addTaskDetails, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addTask({ ...addTaskDetails }));
-    dispatch(closeTaskEdit());
-    setAddTaskDetails({});
+    const { title, description } = addTaskDetails;
+    if (title.trim().length === 0 || description.trim().length === 0) {
+      toast.error("Fields cannot be blank", toastPreference);
+    } else {
+      dispatch(addTask({ ...addTaskDetails }));
+      dispatch(closeTaskEdit());
+      setAddTaskDetails({});
+    }
   };
   return (
     <>
@@ -61,6 +75,7 @@ const AddTask = () => {
             className="w-full rounded-md mb-4 p-2 font-bold text-[0.8rem] text-secondary outline-none"
             name="description"
             id="description"
+            required={true}
             value={addTaskDetails.description}
             onChange={(e) => handleChandeTaskDetails(e)}
             rows="10"
@@ -120,6 +135,7 @@ const AddTask = () => {
       >
         Cancle
       </button>
+      <ToastContainer />
     </>
   );
 };
