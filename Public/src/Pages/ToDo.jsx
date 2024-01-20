@@ -13,8 +13,10 @@ const ToDo = () => {
     if (!localStorage.getItem("ToDo-user")) navigate("/login");
   }, []);
   useEffect(() => {
-    const { _id, username } = JSON.parse(localStorage.getItem("ToDo-user"));
-    dispatch(login({ _id, username }));
+    if (localStorage.getItem("ToDo-user")) {
+      const { _id, username } = JSON.parse(localStorage.getItem("ToDo-user"));
+      dispatch(login({ _id, username }));
+    }
   }, []);
   useEffect(() => {
     setIsLoading(false);
