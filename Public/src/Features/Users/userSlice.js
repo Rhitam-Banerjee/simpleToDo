@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { host } from "../../utils/APIroutes";
 
 const initialState = {
+  isTablet: "",
   userId: "",
   username: "",
   tabToShow: "All",
@@ -14,6 +14,9 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setIsTablet: (state, { payload }) => {
+      state.isTablet = payload;
+    },
     login: (state, actions) => {
       state.userId = actions.payload._id;
       state.username = actions.payload.username;
@@ -39,6 +42,7 @@ const userSlice = createSlice({
   },
 });
 export const {
+  setIsTablet,
   login,
   logOut,
   switchTask,

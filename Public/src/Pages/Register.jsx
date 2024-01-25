@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { registerRoute } from "../utils/APIroutes";
-import { Loader, bg, logoNoBg } from "../assets";
+import { Loader, logoNoBg } from "../assets";
 const Register = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
@@ -71,10 +71,7 @@ const Register = () => {
   return (
     <section
       className="absolute top-0 left-0 h-full w-full flex flex-col justify-center gap-4
-      items-center bg-no-repeat bg-top bg-cover"
-      style={{
-        backgroundImage: `url(${bg})`,
-      }}
+      items-center bg-base"
     >
       {isLoading ? (
         <img src={Loader} alt="loader" />
@@ -84,43 +81,50 @@ const Register = () => {
             action=""
             onSubmit={(e) => handleSubmit(e)}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full 
-          h-3/4 flex flex-col gap-4 justify-around items-center text-base
-          p-10 max-w-[400px] shadow-lg bg-highlight shadow-highlight rounded-lg"
+            h-3/4 flex flex-col gap-4 justify-around items-center text-base
+            p-10 max-w-[400px] shadow-cust1 bg-white rounded-[20px]"
           >
             <div className="mb-4">
-              <img src={logoNoBg} alt="Logo" className="w-[200px]" />
+              <img
+                src={logoNoBg}
+                alt="Logo"
+                className="w-[200px] drop-shadow-lg"
+              />
             </div>
             <input
               type="text"
               name="username"
               placeholder="Username"
               onChange={(e) => handleChange(e)}
-              className="w-full px-4 py-2 text-center outline-none font-bold backdrop-blur-sm transition-all shadow-custom_1 text-logoColor bg-transparent border-highlight border-b-[1px] focus:border-logoColor"
+              className="w-full px-4 py-2 text-center outline-none font-bold transition-all !bg-white rounded-md text-primary shadow-md focus:shadow-none focus:rounded-none focus:!bg-transparent focus:border-b-[1px] focus:border-primary"
             />
             <input
               type="password"
               name="password"
               placeholder="Password"
               onChange={(e) => handleChange(e)}
-              className="w-full px-4 py-2 text-center outline-none font-black backdrop-blur-sm transition-all shadow-custom_1 text-logoColor bg-transparent border-highlight border-b-[1px] focus:border-logoColor"
+              className="w-full px-4 py-2 text-center outline-none font-bold transition-all !bg-white rounded-md text-primary shadow-md focus:shadow-none focus:rounded-none focus:!bg-transparent focus:border-b-[1px] focus:border-primary"
             />
             <input
               type="text"
               name="confirmPassword"
               placeholder="Confirm-Password"
               onChange={(e) => handleChange(e)}
-              className="w-full px-4 py-2 text-center outline-none font-bold backdrop-blur-sm transition-all shadow-custom_1 text-logoColor bg-transparent border-highlight border-b-[1px] focus:border-logoColor"
+              className="w-full px-4 py-2 text-center outline-none font-bold transition-all !bg-white rounded-md text-primary shadow-md focus:shadow-none focus:rounded-none focus:!bg-transparent focus:border-b-[1px] focus:border-primary"
             />
             <button
               type="submit"
-              className="bg-logoColor py-2 px-4 rounded-md font-bold text-highlight"
+              className="bg-primary_transparent py-2 px-4 rounded-md font-bold text-white shadow-md hover:bg-primary"
             >
               Sign-Up
             </button>
-            <span>
+            <span className="text-secondary">
               Already have an account?
               <Link to="/login">
-                <span className="font-black text-logoColor"> Log-In</span>
+                <span className="font-black text-primary hover:text-secondary">
+                  {" "}
+                  Log-In
+                </span>
               </Link>
             </span>
           </form>
